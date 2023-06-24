@@ -14,5 +14,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('login');
+})->name('login');
+
+Route::get('/dashboard', function () {
+    return view('dashboard.index', [
+        'title' => 'Dashboard'
+    ]);
+})->name('dashboard.index');
+
+Route::get('/dasboard/biodata-mahasiswa', function () {
+    return view('dashboard.biodata-mahasiswa.index', [
+        'parent' => 'Mahasiswa',
+        'title' => 'Biodata Mahasiswa'
+    ]);
+})->name('dashboard.biodata-mahasiswa');

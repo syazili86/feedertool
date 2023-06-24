@@ -2,7 +2,14 @@
 module.exports = {
     content: ["./resources/**/*.blade.php", "./resources/**/*.js"],
     theme: {
-        extend: {},
+        fontFamily: {
+            montserrat: ["Montserrat", "Arial", "sans-serif"],
+        },
+        extend: {
+            colors: {
+                primary: "#3b82f6",
+            },
+        },
     },
     plugins: [],
 };
