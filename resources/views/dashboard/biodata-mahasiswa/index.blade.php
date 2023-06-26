@@ -61,7 +61,7 @@
                     class="absolute left-0 flex items-center justify-center w-10 h-10 bg-gray-300 border-2 rounded-full shadow-lg">
                     <i data-feather="eye" width="17"></i>
                 </span>
-                <span class="ml-10">Tampilkan</span>
+                <span class="ml-10">Show</span>
             </button>
             <button
                 class="relative flex items-center w-1/3 gap-1 p-2 font-semibold text-white transition duration-200 ease-in-out bg-blue-500 border-2 border-blue-500 rounded-full hover:shadow-lg focus:outline-none focus:shadow-lg hover:text-white hover:bg-blue-500">
