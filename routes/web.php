@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,19 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-})->name('login');
+Route::middleware('guest')->group(function () {
+    Route::get('/', [LoginController::class, 'login'])->name('login');
+    Route::post('/login', [LoginController::class, 'authenticate'])->name('auth');
+});
 
-Route::get('/dashboard', function () {
-    return view('dashboard.index', [
-        'title' => 'Dashboard'
-    ]);
-})->name('dashboard.index');
 
-Route::get('/dasboard/biodata-mahasiswa', function () {
-    return view('dashboard.biodata-mahasiswa.index', [
-        'parent' => 'Mahasiswa',
-        'title' => 'Biodata Mahasiswa'
-    ]);
-})->name('dashboard.biodata-mahasiswa');
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/dashboard', function () {
+        return view('dashboard.index', [
+            'title' => 'Dashboard'
+        ]);
+    })->name('dashboard.index');
+    Route::get('/dashboard/biodata-mahasiswa', function () {
+        return view('dashboard.biodata-mahasiswa.index', [
+            'parent' => 'Mahasiswa',
+            'title' => 'Biodata Mahasiswa'
+        ]);
+    })->name('dashboard.biodata-mahasiswa');
+});

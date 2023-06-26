@@ -19,7 +19,7 @@ class ProfilPTFactory extends Factory
         return [
             'id_perguruan_tinggi' => $this->faker->uuid(),
             'kode_perguruan_tinggi' => $this->faker->randomNumber(6, true),
-            'nama_perguruan_tinggi' => 'University' . $this->faker->company(),
+            'nama_perguruan_tinggi' => 'University ' . $this->faker->company(),
             'telepon' => $this->faker->phoneNumber(),
             'faximile' => $this->faker->phoneNumber(),
             'email' => 'email@gmail.com',

@@ -18,21 +18,33 @@
                 <h1 class="text-4xl font-bold">ESync</h1>
                 <span class="font-semibold">Pusat Data Pendidikan Tinggi</span>
             </div>
-            <form class=" space-y-5">
+            @if (session()->has('loginError'))
+                <div class="border p-3 rounded-lg border-red-500 bg-red-200 text-red-500 font-bold text-center">
+                    {{ session('loginError') }}
+                </div>
+            @endif
+            <form action="{{ route('auth') }}" method="POST" class=" space-y-5">
+                @csrf
                 <div class="flex flex-col">
                     <label class="font-semibold mb-1" for="username">Username</label>
                     <input type="text"
-                        class="border ring-gray-500 font-semibold rounded-md p-3 focus:outline-none focus:bg-blue-100 focus:ring-blue-500"
-                        placeholder="username" autofocus>
+                        class="border @error('username') border-red-500 @enderror ring-gray-500 font-semibold rounded-lg px-3 py-2 focus:outline-none focus:bg-blue-100 focus:ring-blue-500"
+                        placeholder="username" name="username" value="{{ old('username') }}" autofocus>
+                    @error('username')
+                        <span class="text-red-500 text-xs font-semibold">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="flex flex-col">
                     <label class="font-semibold mb-1" for="password">Password</label>
                     <input type="password"
-                        class="border ring-gray-500 font-semibold rounded-md p-3 focus:outline-none focus:bg-blue-100 focus:ring-blue-500"
-                        placeholder="password">
+                        class="border @error('password') border-red-500 @enderror ring-gray-500 font-semibold rounded-lg px-3 py-2 focus:outline-none focus:bg-blue-100 focus:ring-blue-500"
+                        placeholder="password" name="password">
+                    @error('password')
+                        <span class="text-red-500 text-xs font-semibold">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div>
-                    <button class="bg-blue-500 text-white w-full py-3 rounded-md hover:bg-blue-600">Sign In</button>
+                    <button class="bg-blue-500 text-white w-full py-2 rounded-lg hover:bg-blue-600">Sign In</button>
                 </div>
             </form>
         </section>

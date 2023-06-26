@@ -26,8 +26,8 @@
         <div class="flex flex-row-reverse items-center">
 
             <!-- user -->
-            <div class="relative dropdown md:static">
-
+            <form action="{{ route('logout') }}" method="POST" class="relative dropdown md:static">
+                @csrf
                 <button
                     class="flex flex-wrap items-center gap-2 px-2 py-1 border rounded-md hover:bg-gray-200 menu-btn focus:outline-none focus:shadow-outline">
                     <h1 class="p-0 m-0 text-sm font-semibold leading-none text-gray-800">Log Out</h1>
@@ -35,7 +35,7 @@
                     <!-- item -->
                 </button>
 
-            </div>
+            </form>
             <!-- end user -->
 
         </div>
