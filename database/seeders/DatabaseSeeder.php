@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
         User::create([
             'name' => 'admin',
             'username' => 'username',
@@ -24,6 +23,7 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
+        \App\Models\User::factory(30)->create();
         ProfilPT::factory(10)->create();
     }
 }

@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+    @livewireStyles()
     <title>FeederSync | {{ $title }}</title>
 </head>
 
@@ -45,7 +46,7 @@
     {{-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> --}}
     <script src="{{ asset('js/script.js') }}"></script>
     <!-- end script -->
-
+    @livewireScripts()
 </body>
 
 </html>
