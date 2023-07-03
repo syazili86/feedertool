@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MahasiswaLulusDOController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +34,5 @@ Route::middleware('auth')->group(function () {
             'title' => 'Biodata Mahasiswa'
         ]);
     })->name('dashboard.biodata-mahasiswa');
+    Route::get('/dashboard/mahasiswa-lulus-do', [MahasiswaLulusDOController::class, 'index'])->name('dashboard.mahasiswa-lulus-do');
 });

@@ -37,8 +37,8 @@
         <!-- end link -->
 
         <!-- link -->
-        <a href="{{ route('dashboard.index') }}"
-            class="{{ $title === 'Status Lulus DO' ? $active : '' }} flex items-end mb-1 gap-2 capitalize font-medium text-sm transition ease-in-out duration-500 p-2 rounded hover:text-white hover:bg-blue-500">
+        <a href="{{ route('dashboard.mahasiswa-lulus-do') }}"
+            class="{{ $title === 'Mahasiswa Lulus DO' ? $active : '' }} flex items-end mb-1 gap-2 capitalize font-medium text-sm transition ease-in-out duration-500 p-2 rounded hover:text-white hover:bg-blue-500">
             <i data-feather="package" width="15"></i>
             Status Lulus DO
         </a>

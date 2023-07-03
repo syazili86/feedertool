@@ -54,7 +54,7 @@
                 </h1>
             </div>
             <div class="relative card-body">
-                <livewire:biodata-mahasiswa-table />
+                <livewire:mahasiswa-lulus-d-o-table />
             </div>
         </div>
         <div class="card">
