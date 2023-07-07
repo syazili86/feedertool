@@ -1,7 +1,9 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MahasiswaLulusDOController;
 
 /*
@@ -20,14 +22,9 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [LoginController::class, 'authenticate'])->name('auth');
 });
 
-
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-    Route::get('/dashboard', function () {
-        return view('dashboard.index', [
-            'title' => 'Dashboard'
-        ]);
-    })->name('dashboard.index');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/dashboard/biodata-mahasiswa', function () {
         return view('dashboard.biodata-mahasiswa.index', [
             'parent' => 'Mahasiswa',
@@ -35,4 +32,6 @@ Route::middleware('auth')->group(function () {
         ]);
     })->name('dashboard.biodata-mahasiswa');
     Route::get('/dashboard/mahasiswa-lulus-do', [MahasiswaLulusDOController::class, 'index'])->name('dashboard.mahasiswa-lulus-do');
+
+    Route::post('/get-token', [DashboardController::class, 'getToken'])->name('dashboard.get-token');
 });

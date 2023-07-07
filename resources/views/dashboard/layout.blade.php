@@ -14,27 +14,20 @@
     <title>FeederSync | {{ $title }}</title>
 </head>
 
-<body class="text-sm font-medium bg-gray-100 font-montserrat">
+<body class="text-sm font-medium bg-gray-100 font-montserrat ">
 
-    <!-- start navbar -->
+    @if (!session()->has('tokenPddikti'))
+        @include('dashboard.components.card-get-token')
+    @endif
+
     @include('dashboard.components.navbar')
-    <!-- end navbar -->
 
-    <!-- strat wrapper -->
     <div class="flex flex-row flex-wrap h-screen">
-
-        <!-- start sidebar -->
         @include('dashboard.components.sidebar')
-        <!-- end sidbar -->
-
-        <!-- strat content -->
         <div class="flex-1 p-6 bg-gray-100 md:mt-16">
             @yield('content')
         </div>
-        <!-- end content -->
-
     </div>
-    <!-- end wrapper -->
 
     <!-- script -->
     {{-- feather icons --}}
