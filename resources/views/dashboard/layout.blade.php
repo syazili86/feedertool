@@ -15,7 +15,6 @@
 </head>
 
 <body class="text-sm font-medium bg-gray-100 font-montserrat ">
-
     @if (!session()->has('tokenPddikti'))
         @include('dashboard.components.card-get-token')
     @endif

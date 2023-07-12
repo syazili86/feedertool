@@ -30,11 +30,17 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+        $tokenPddikti = session()->get('tokenPddikti');
+
         Auth::logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+
+        if ($tokenPddikti) {
+            session()->put('tokenPddikti', $tokenPddikti);
+        }
 
         return redirect('/');
     }

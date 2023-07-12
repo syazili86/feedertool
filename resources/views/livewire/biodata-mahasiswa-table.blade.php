@@ -1,7 +1,11 @@
 <div>
     <button wire:click="pushUsers"
         class="absolute top-0 right-0 flex items-center justify-center w-10 h-10 -mt-5 -mr-2 text-white bg-green-400 rounded-full focus:outline-none hover:shadow-lg">
-        <i data-feather="arrow-right"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+        </svg>
+
     </button>
     <div class="pb-2 mx-1">
         <input wire:model.debounce.300ms="search" type="text"

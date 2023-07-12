@@ -24,7 +24,7 @@
                     {{ session('loginError') }}
                 </div>
             @endif
-            <form action="{{ route('auth') }}" method="POST" autocomplete="off" class=" space-y-5">
+            <form action="{{ route('auth') }}" method="POST" class=" space-y-5">
                 @csrf
                 <div class="flex flex-col">
                     <div

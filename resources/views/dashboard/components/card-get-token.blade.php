@@ -8,37 +8,49 @@
                      d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V320c0 17.7 14.3 32 32 32s32-14.3 32-32V64zM32 480a40 40 0 1 0 0-80 40 40 0 1 0 0 80z" />
              </svg>
              <h1 class="text-xl font-semibold mt-5">Login Untuk Mendapatkan Token</h1>
+             <p class="text-gray-600 text-xs">gunakan akun pddikti untuk mendapatkan token</p>
          </div>
          @if (session()->has('message'))
              <div class="border font-semibold p-4 rounded-lg bg-red-200 border-red-300 text-red-500">
                  Login Gagal . {{ session('message') }}
              </div>
          @endif
-         <form action="{{ route('dashboard.get-token') }}" method="POST" class="flex flex-col gap-2">
-             @csrf
-             <div>
-                 <input type="text" name="username" placeholder="username"
-                     class="border-2 w-full px-5 py-4 rounded-lg focus:outline-none focus:border-blue-700 @error('username') border-red-500 @enderror"
-                     value="{{ old('username') }}">
-                 @error('username')
-                     <div class="text-red-500 text-xs">
-                         {{ $message }}
-                     </div>
-                 @enderror
-             </div>
-             <div>
-                 <input type="password" name="password" placeholder="password"
-                     class="border-2 w-full px-5 py-4 rounded-lg focus:outline-none focus:border-blue-700 @error('password') border-red-500 @enderror">
-                 @error('password')
-                     <div class="text-red-500 text-xs">
-                         {{ $message }}
-                     </div>
-                 @enderror
-             </div>
-             <button type="submit"
-                 class="bg-blue-700 px-5 py-4 rounded-lg text-white font-bold mt-5 hover:bg-blue-500">
-                 Submit
-             </button>
-         </form>
+         <div class="space-y-4">
+             <form action="{{ route('dashboard.get-token') }}" method="POST" class="flex flex-col gap-2">
+                 @csrf
+                 <div>
+                     <input type="text" name="username" placeholder="username"
+                         class="border-2 w-full px-5 py-4 rounded-lg focus:outline-none focus:border-blue-700 @error('username') border-red-500 @enderror"
+                         value="{{ old('username') }}">
+                     @error('username')
+                         <div class="text-red-500 text-xs">
+                             {{ $message }}
+                         </div>
+                     @enderror
+                 </div>
+                 <div>
+                     <input type="password" name="password" placeholder="password"
+                         class="border-2 w-full px-5 py-4 rounded-lg focus:outline-none focus:border-blue-700 @error('password') border-red-500 @enderror">
+                     @error('password')
+                         <div class="text-red-500 text-xs">
+                             {{ $message }}
+                         </div>
+                     @enderror
+                 </div>
+                 <button type="submit"
+                     class="bg-blue-700 px-5 py-4 rounded-lg text-white font-bold mt-5 hover:bg-blue-500">
+                     Submit
+                 </button>
+             </form>
+             <form action="{{ route('logout') }}" method="POST" class="relative dropdown md:static">
+                 @csrf
+                 <button class="flex flex-wrap items-center gap-2 mx-auto">
+                     <h1 class="p-0 m-0 text-sm font-semibold underline leading-none text-red-600 hover:text-red-500">
+                         Log Out</h1>
+                     {{-- <i data-feather="log-out" class="w-4"></i> --}}
+                     <!-- item -->
+                 </button>
+             </form>
+         </div>
      </div>
  </div>

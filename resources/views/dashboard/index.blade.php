@@ -10,7 +10,7 @@
             </div>
             <div class="relative card-body">
                 <div>
-                    @if ($getProfilPT)
+                    @if ($data)
                         <table>
                             <tbody>
                                 <tr class="border-b">
@@ -19,7 +19,7 @@
                                     </td>
                                     <td class="p-2"> : </td>
                                     <td class="p-2">
-                                        {{ $getProfilPT->nama_perguruan_tinggi }}
+                                        {{ $data['nama_perguruan_tinggi'] }}
                                     </td>
                                 </tr>
                                 <tr class="border-b">
@@ -28,7 +28,7 @@
                                     </td>
                                     <td class="p-2"> : </td>
                                     <td class="p-2">
-                                        {{ $getProfilPT->kode_perguruan_tinggi }}
+                                        {{ $data['kode_perguruan_tinggi'] }}
                                     </td>
                                 </tr>
                                 <tr class="border-b">
@@ -37,7 +37,7 @@
                                     </td>
                                     <td class="p-2"> : </td>
                                     <td class="p-2">
-                                        {{ $getProfilPT->status_perguruan_tinggi }}
+                                        {{ $data['status_perguruan_tinggi'] }}
                                     </td>
                                 </tr>
                                 <tr class="border-b">
@@ -46,7 +46,7 @@
                                     </td>
                                     <td class="p-2"> : </td>
                                     <td class="p-2">
-                                        {{ $getProfilPT->jalan }}
+                                        {{ $data['jalan'] }}
                                     </td>
                                 </tr>
                                 <tr class="border-b">
@@ -55,7 +55,7 @@
                                     </td>
                                     <td class="p-2"> : </td>
                                     <td class="p-2">
-                                        {{ $getProfilPT->email }}
+                                        {{ $data['email'] }}
                                     </td>
                                 </tr>
                                 <tr class="border-b">
@@ -64,7 +64,7 @@
                                     </td>
                                     <td class="p-2"> : </td>
                                     <td class="p-2">
-                                        {{ $getProfilPT->telepon }}
+                                        {{ $data['telepon'] }}
                                     </td>
                                 </tr>
                                 <tr class="border-b">
@@ -73,7 +73,7 @@
                                     </td>
                                     <td class="p-2"> : </td>
                                     <td class="p-2">
-                                        {{ $getProfilPT->website }}
+                                        {{ $data['website'] }}
                                     </td>
                                 </tr>
                                 <tr class="border-b">
@@ -82,7 +82,7 @@
                                     </td>
                                     <td class="p-2"> : </td>
                                     <td class="p-2">
-                                        {{ $getProfilPT->nama_status_milik }}
+                                        {{ $data['nama_status_milik'] }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -112,8 +112,10 @@
 
                             <!-- bottom -->
                             <div class="mt-8">
-                                <h1 class="h5 num-4"></h1>
-                                <p>items sales</p>
+                                <h1 class="h5">
+                                    {{ $countBiodataMahasiswa ? number_format($countBiodataMahasiswa, 0, ',', '.') : '😢' }}
+                                </h1>
+                                <p>Biodata Mahasiswa</p>
                             </div>
                             <!-- end bottom -->
                         </div>
@@ -138,8 +140,9 @@
 
                             <!-- bottom -->
                             <div class="mt-8">
-                                <h1 class="h5 num-4"></h1>
-                                <p>new orders</p>
+                                <h1 class="h5">
+                                    {{ $countListDosen ? number_format($countListDosen, 0, ',', '.') : '😢' }}</h1>
+                                <p>List Dosen</p>
                             </div>
                             <!-- end bottom -->
                         </div>
@@ -164,8 +167,10 @@
 
                             <!-- bottom -->
                             <div class="mt-8">
-                                <h1 class="h5 num-4"></h1>
-                                <p>total Products</p>
+                                <h1 class="h5">
+                                    {{ $countMahasiswaLulusDO ? number_format($countMahasiswaLulusDO, 0, ',', '.') : '😢' }}
+                                </h1>
+                                <p>Mahasiswa Lulus DO</p>
                             </div>
                             <!-- end bottom -->
                         </div>

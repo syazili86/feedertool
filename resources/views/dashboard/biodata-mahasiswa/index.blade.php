@@ -65,11 +65,7 @@
                 </h1>
             </div>
             <div class="relative card-body">
-                <button
-                    class="absolute top-0 left-0 flex items-center justify-center w-10 h-10 -mt-5 -ml-2 text-white bg-red-400 rounded-full focus:outline-none hover:shadow-lg">
-                    <i data-feather="arrow-left"></i>
-                </button>
-                <div class="text-center">There are no records to display</div>
+                @livewire('biodata-mahasiswa-feeder-table')
             </div>
         </div>
     </div>

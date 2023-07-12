@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         User::create([
             'name' => 'admin',
-            'username' => 'username',
-            'password' => bcrypt('password'),
+            'username' => '021019',
+            'password' => bcrypt('pdadsti@ubd2022'),
             'remember_token' => Str::random(10),
         ]);
 

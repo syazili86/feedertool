@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 class MyClass
 {
     private static $api_url = "http://11.11.11.20:8100/ws/live2.php";
+    // private static $api_url = "http://10.237.15.96:8100/ws/live2.php";
 
     public static function getToken($username, $password)
     {
@@ -18,18 +19,20 @@ class MyClass
             'password' => $password
         ]);
 
-        return json_decode($response->body());
+        return $response->json();
     }
 
-    public static function getProfilPT($token)
+    public static function fetchData($action, $token, $filter, $limit)
     {
         $url = static::$api_url;
 
         $response = Http::post($url, [
-            'act' => 'GetProfilPT',
-            'token' => $token
+            'act' => $action,
+            'token' => $token,
+            'filter' => $filter,
+            'limit' => $limit
         ]);
 
-        return json_decode($response->body());
+        return $response->json();
     }
 }
