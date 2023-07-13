@@ -113,7 +113,7 @@
                             <!-- bottom -->
                             <div class="mt-8">
                                 <h1 class="h5">
-                                    {{ $countBiodataMahasiswa ? number_format($countBiodataMahasiswa, 0, ',', '.') : '😢' }}
+                                    {{ $countBiodataMahasiswa ? number_format($countBiodataMahasiswa, 0, ',', '.') : '0' }}
                                 </h1>
                                 <p>Biodata Mahasiswa</p>
                             </div>
@@ -141,7 +141,7 @@
                             <!-- bottom -->
                             <div class="mt-8">
                                 <h1 class="h5">
-                                    {{ $countListDosen ? number_format($countListDosen, 0, ',', '.') : '😢' }}</h1>
+                                    {{ $countListDosen ? number_format($countListDosen, 0, ',', '.') : '0' }}</h1>
                                 <p>List Dosen</p>
                             </div>
                             <!-- end bottom -->
@@ -168,7 +168,7 @@
                             <!-- bottom -->
                             <div class="mt-8">
                                 <h1 class="h5">
-                                    {{ $countMahasiswaLulusDO ? number_format($countMahasiswaLulusDO, 0, ',', '.') : '😢' }}
+                                    {{ $countMahasiswaLulusDO ? number_format($countMahasiswaLulusDO, 0, ',', '.') : '0' }}
                                 </h1>
                                 <p>Mahasiswa Lulus DO</p>
                             </div>

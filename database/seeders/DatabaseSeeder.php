@@ -24,6 +24,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\User::factory(30)->create();
-        ProfilPT::factory(10)->create();
+        // ProfilPT::factory(10)->create();
     }
 }

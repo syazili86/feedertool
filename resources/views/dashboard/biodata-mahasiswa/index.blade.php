@@ -4,6 +4,34 @@
     <!-- header -->
     @include('dashboard.components.header')
 
+    @if (session()->has('messageSuccess'))
+        <div id="modalSuccess" class="fixed z-10 inset-0 overflow-y-auto">
+            <div class="flex items-center justify-center min-h-screen px-4 py-10 text-center">
+                <div class="fixed inset-0 bg-black opacity-75"></div>
+                <div
+                    class="bg-white py-3 rounded-lg overflow-hidden shadow-xl transform transition-all w-1/3 sm:max-w-lg sm:w-full">
+                    <div class="p-5">
+                        <h4 class="text-4xl font-semibold text-green-600 mb-5">Berhasil</h4>
+                        <p class=" text-green-500 mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="bg-gray-200 mx-auto rounded-full p-2 w-20 h-20">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
+
+                        </p>
+                        <span class="text-lg">{{ session('messageSuccess') }}</span>
+                    </div>
+                    <div class="px-6 py-4 text-center">
+                        <button onclick="modalFn('modalSuccess')"
+                            class="px-4 py-2 text-sm font-semibold  bg-gray-400 hover:bg-gray-500 rounded focus:outline-none">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <div class="grid grid-cols-2 gap-6 mt-6 xl:grid-cols-1">
         <div class="card">
             <div class="card-header ">
@@ -71,3 +99,9 @@
     </div>
     {{-- </div> --}}
 @endsection
+
+<script>
+    function modalFn(elementId) {
+        document.getElementById(elementId).classList.toggle('hidden');
+    }
+</script>

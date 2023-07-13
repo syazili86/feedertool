@@ -1,17 +1,54 @@
 <div>
-    <div wire:loading>
-        <div class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-75 z-50"
-            x-show="isLoading">
-            <span class="text-white text-xl">Loading...</span>
+
+    <div id="modalDelete" class="hidden fixed z-10 inset-0 overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen px-4 py-10 text-center">
+            <div class="fixed inset-0 bg-black opacity-75"></div>
+            <div
+                class="bg-white py-3 rounded-lg overflow-hidden shadow-xl transform w-1/3 transition-all sm:max-w-lg sm:w-full">
+                <div class="p-5">
+                    {{-- <h4 class="text-4xl font-semibold text-red-600 mb-5">Konfirmasi Hapus</h4> --}}
+                    <p class=" text-red-500 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="bg-gray-200 mx-auto rounded-full p-2 w-20 h-20">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                        </svg>
+
+                    </p>
+                    <p class="text-lg text-black">Apakah Anda yakin !!!</p>
+                    <span>ingin menghapus data yang sudah pilih ?</span>
+                    </p>
+                </div>
+                <div class="px-6 py-4  text-center">
+                    <button onclick="modalFn('modalDelete')"
+                        class="px-4 py-2 text-sm font-semibold  bg-gray-400 hover:bg-gray-500 rounded focus:outline-none">
+                        Batal
+                    </button>
+                    <button onclick="modalFn('modalDelete')" wire:click="deleteData"
+                        class="ml-2 px-4 py-2 text-sm font-semibold text-white bg-red-500 hover:bg-red-600 rounded focus:outline-none">
+                        Hapus
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
-    <button wire:click="pushUsers"
+
+    @if (session()->has('deleteMessageWarning'))
+        <div class="border text-yellow-700 p-4 border-yellow-300 bg-yellow-200 mx-1 mb-3 rounded">
+            <span>{{ session('deleteMessageWarning') }}</span>
+        </div>
+    @elseif (session()->has('deleteMessageError'))
+        <div class="border text-red-700 p-4 border-red-300 bg-red-200 mx-1 mb-3 rounded">
+            <span>{{ session('deleteMessageError') }}</span>
+        </div>
+    @endif
+    {{-- <button wire:click="pushUsers"
         class="absolute top-0 left-0 flex items-center justify-center w-10 h-10 -mt-5 -ml-2 text-white bg-red-400 rounded-full focus:outline-none hover:shadow-lg">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
         </svg>
-    </button>
+    </button> --}}
     <div class="pb-2 mx-1">
         <input wire:model.debounce.300ms="search" type="text"
             class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"placeholder="Search By {{ $searchBy !== 'id_mahasiswa' ? $searchBy : '(pilih filter berdasarkan)' }}">
@@ -63,8 +100,22 @@
                     <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                 </svg>
             </div>
-            {{-- <button wire:click="deleteUsers"
-                class=button"block w-full px-4 py-3 pr-8 leading-tight text-white bg-red-500 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500">Delete</button> --}}
+        </div>
+        <div class="relative mx-1">
+            <button onclick="modalFn('modalDelete')"
+                class="block w-full px-4 py-3 pr-8 leading-tight text-white
+            bg-red-500 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-red-600
+            ">
+                Delete
+            </button>
+            <div class="absolute inset-y-0 right-0 flex items-center px-2 text-white pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                </svg>
+
+            </div>
         </div>
     </div>
     @if ($users)
@@ -82,6 +133,11 @@
                             <th class="px-4 py-2">Tempat Lahir</th>
                             <th class="px-4 py-2">Agama</th>
                             <th class="px-4 py-2">NIK</th>
+                            <th class="px-4 py-2">NISN</th>
+                            <th class="px-4 py-2">Jalan</th>
+                            <th class="px-4 py-2">Kelurahan</th>
+                            <th class="px-4 py-2">Nama Ayah</th>
+                            <th class="px-4 py-2">Nama Ibu</th>
                         </tr>
                     </thead>
 
@@ -98,6 +154,11 @@
                                 <td class="px-4 py-2 border-b">{{ $user['tempat_lahir'] }}</td>
                                 <td class="px-4 py-2 border-b">{{ $user['nama_agama'] }}</td>
                                 <td class="px-4 py-2 border-b">{{ $user['nik'] }}</td>
+                                <td class="px-4 py-2 border-b">{{ $user['nisn'] }}</td>
+                                <td class="px-4 py-2 border-b">{{ $user['jalan'] }}</td>
+                                <td class="px-4 py-2 border-b">{{ $user['kelurahan'] }}</td>
+                                <td class="px-4 py-2 border-b">{{ $user['nama_ayah'] }}</td>
+                                <td class="px-4 py-2 border-b">{{ $user['nama_ibu_kandung'] }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -110,4 +171,7 @@
     @else
         😢 Session Telah Habis
     @endif
+
+
+    @include('dashboard.components.loading-animate')
 </div>

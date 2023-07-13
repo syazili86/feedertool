@@ -1,4 +1,4 @@
- <div class="fixed flex items-center justify-center z-10 -mt-20 overflow-hidden inset-0 w-full"
+ <div class="fixed flex items-center justify-center z-50 -mt-20 overflow-hidden inset-0 w-full"
      style="background: rgba(0, 0, 0, 0.4);">
      <div class="bg-gray-100 px-10 py-16 text-sm shadow-lg mt-20 space-y-10 w-1/3" style="border-radius: 30px">
          <div class="text-center text-gray-700">

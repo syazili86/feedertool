@@ -4,10 +4,12 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use Livewire\Component;
+use App\Providers\MyClass;
 use Livewire\WithPagination;
+use App\Models\BiodataMahasiswa;
+use Illuminate\Support\Collection;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
 
 class BiodataMahasiswaFeederTable extends Component
 {
@@ -128,9 +130,29 @@ class BiodataMahasiswaFeederTable extends Component
         }
     }
 
-    public function pushUsers()
+    public function deleteData()
     {
-        dd($this->selected);
-        User::destroy($this->selected);
+        $id_mahasiswa = $this->selected;
+
+        if (!$id_mahasiswa) {
+            return back()->with('deleteMessageWarning', 'Pilih data yang ingin di hapus');
+        }
+
+        foreach ($id_mahasiswa as $id_mahasiswa) {
+
+            // $data = BiodataMahasiswa::find($id_mahasiswa);
+
+            $response = MyClass::deleteData($id_mahasiswa);
+
+            // dd($response['error_code']);
+            if ($response['error_code'] !== 0) {
+                return back()->with('deleteMessageError', 'Gagal : ' . $response['error_desc']);
+            }
+
+            // BiodataMahasiswa::where('id_mahasiswa', $id)->update(['sudah_sync' => true]);
+
+        }
+
+        return redirect(route('dashboard.biodata-mahasiswa'))->with('messageSuccess', 'Delete Data Berhasil');
     }
 }

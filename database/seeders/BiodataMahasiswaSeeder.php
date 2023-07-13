@@ -14,6 +14,6 @@ class BiodataMahasiswaSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\BiodataMahasiswa::factory(100)->create();
     }
 }
