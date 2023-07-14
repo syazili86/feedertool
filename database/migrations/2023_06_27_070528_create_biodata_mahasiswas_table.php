@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('biodata_mahasiswas', function (Blueprint $table) {
             $table->uuid("id_mahasiswa")->primary();
+            $table->id();
+            $table->uuid("id_mahasiswa");
+            $table->string('nim'); // untuk menampung nim dari data yang diimport
+            $table->integer('idnumber'); // untuk menampung primary key dari data yang diimport
             $table->string("nama_mahasiswa", 100);
             $table->char("jenis_kelamin", 1);
             $table->string("tempat_lahir", 32);
