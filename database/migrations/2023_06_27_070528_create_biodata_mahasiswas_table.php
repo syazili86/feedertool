@@ -14,11 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('biodata_mahasiswas', function (Blueprint $table) {
-            $table->uuid("id_mahasiswa")->primary();
+            // $table->uuid("id_mahasiswa")->primary();
             $table->id();
-            $table->uuid("id_mahasiswa");
+            $table->uuid("id_mahasiswa")->unique();
             $table->string('nim'); // untuk menampung nim dari data yang diimport
             $table->integer('idnumber'); // untuk menampung primary key dari data yang diimport
+            $table->integer('id_neofeeder'); // untuk menampung primary key feeder biodata mahasiswa
             $table->string("nama_mahasiswa", 100);
             $table->char("jenis_kelamin", 1);
             $table->string("tempat_lahir", 32);

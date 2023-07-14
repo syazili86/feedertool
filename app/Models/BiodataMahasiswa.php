@@ -11,9 +11,8 @@ class BiodataMahasiswa extends Model
     use HasFactory;
     use HasUuids;
 
-    protected $guarded = ['id_mahasiswa'];
-    // protected $table = 'biodata_mahasiswas';
-    protected $primaryKey = 'id_mahasiswa';
+    protected $guarded = ['id'];
+
     public $timestamps = false;
 
     public static function search($search)
