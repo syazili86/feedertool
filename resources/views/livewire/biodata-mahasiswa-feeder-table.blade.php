@@ -17,6 +17,9 @@
                     </p>
                     <p class="text-lg text-black">Apakah Anda yakin !!!</p>
                     <span>ingin menghapus data yang sudah pilih ?</span>
+                    <p class="mt-3 text-xs text-red-500">
+                        Data yang akan dihapus :
+                        <strong>{{ count($selected) }}</strong>
                     </p>
                 </div>
                 <div class="px-6 py-4  text-center">
@@ -118,6 +121,7 @@
             </div>
         </div>
     </div>
+
     @if ($users)
         @if ($users->isNotEmpty())
             <div class="overflow-x-auto">

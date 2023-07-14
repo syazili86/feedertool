@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 
 class DashboardController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $response = getDataWithAct('GetProfilPT', null);
         $getCountBiodataMahasiswa = getDataWithAct('GetCountBiodataMahasiswa');

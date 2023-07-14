@@ -16,14 +16,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // User::create([
+        //     'name' => 'admin',
+        //     'username' => '021019',
+        //     'password' => bcrypt('pdadsti@ubd2022'),
+        //     'remember_token' => Str::random(10),
+        // ]);
         User::create([
-            'name' => 'admin',
-            'username' => '021019',
-            'password' => bcrypt('pdadsti@ubd2022'),
+            'name' => 'admin 2',
+            'username' => 'admin2',
+            'password' => bcrypt('admin2'),
             'remember_token' => Str::random(10),
         ]);
 
-        \App\Models\User::factory(30)->create();
+        // \App\Models\User::factory(30)->create();
         // ProfilPT::factory(10)->create();
     }
 }

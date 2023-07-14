@@ -4,22 +4,41 @@
     <!-- header -->
     @include('dashboard.components.header')
 
-    @if (session()->has('messageSuccess'))
+    @if (session()->has('message'))
         <div id="modalSuccess" class="fixed z-10 inset-0 overflow-y-auto">
             <div class="flex items-center justify-center min-h-screen px-4 py-10 text-center">
                 <div class="fixed inset-0 bg-black opacity-75"></div>
                 <div
                     class="bg-white py-3 rounded-lg overflow-hidden shadow-xl transform transition-all w-1/3 sm:max-w-lg sm:w-full">
                     <div class="p-5">
-                        <h4 class="text-4xl font-semibold text-green-600 mb-5">Berhasil</h4>
-                        <p class=" text-green-500 mb-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="bg-gray-200 mx-auto rounded-full p-2 w-20 h-20">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                            </svg>
+                        @if (session('message') === 'Gagal')
+                            <h4 class="text-4xl font-semibold text-red-600 mb-5">Error</h4>
+                            <p class=" text-red-500 mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor" class="bg-gray-200 mx-auto rounded-full p-2 w-20 h-20">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </p>
+                        @else
+                            <h4 class="text-4xl font-semibold text-green-600 mb-5">Berhasil</h4>
+                            <p class=" text-green-500 mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor"
+                                    class="bg-gray-200 mx-auto rounded-full p-2 w-20 h-20">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                </svg>
 
-                        </p>
-                        <span class="text-lg">{{ session('messageSuccess') }}</span>
+                            </p>
+                        @endif
+                        <h5 class="text-lg mb-2">{{ session('message') }}</h5>
+
+                        @if (session('data'))
+                            <p>With Error</p>
+                            <a onclick="modalFn('modalSuccess')" href="#data-fails"
+                                class="text-xs underline text-red-500">lihat
+                                data</a>
+                        @endif
+
                     </div>
                     <div class="px-6 py-4 text-center">
                         <button onclick="modalFn('modalSuccess')"
@@ -97,6 +116,33 @@
             </div>
         </div>
     </div>
+
+    @if (session()->has('data') && session('data') !== false)
+        <div id="data-fails" class="grid gap-6 mt-6 xl:grid-cols-1">
+            <div class="card">
+                <div class="card-body relative" onclick="modalFn('data-fails')">
+                    <div class="absolute right-0 top-0 cursor-pointer rounded-full -mr-2 -mt-2 ">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="bg-white p-1 border mx-auto rounded-full w-8 h-8 hover:bg-red-100">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </div>
+                    @foreach (session('data') as $data)
+                        <div class="border mb-2 p-3 text-xs text-red-600 rounded bg-red-200 border-red-300">
+                            <strong>response : </strong>{{ $data['response'] }}
+                            <div class="font-bold">
+                                ("id_mahasiswa" : "{{ $data['data']['id_mahasiswa'] }}", "nama_mahasiswa" :
+                                "{{ $data['data']['nama_mahasiswa'] }}")
+                            </div>
+                        </div>
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
+    @endif
+
+
     {{-- </div> --}}
 @endsection
 

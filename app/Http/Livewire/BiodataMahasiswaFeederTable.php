@@ -8,6 +8,7 @@ use App\Providers\MyClass;
 use Livewire\WithPagination;
 use App\Models\BiodataMahasiswa;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -35,11 +36,16 @@ class BiodataMahasiswaFeederTable extends Component
 
         $items = $this->searchItems();
 
+        // dd($items);
         // dd(session()->get('tokenPddikti'));
+        if ($items !== false) {
+            $this->updatedSelectAll($this->selectAll);
+        }
 
         return view('livewire.biodata-mahasiswa-feeder-table', [
             'users' => $items,
-            'searchBy' => $this->sortField
+            'searchBy' => $this->sortField,
+            'selected' => $this->selected
         ]);
     }
 
@@ -68,10 +74,6 @@ class BiodataMahasiswaFeederTable extends Component
         $data = $this->responseData();
 
         if ($data) {
-            // $filteredItems = $data->filter(function ($item) {
-            //     return str_contains(strtolower($item['nama_mahasiswa']), strtolower($this->search))
-            //         || str_contains(strtolower($item['tempat_lahir']), strtolower($this->search));
-            // });
 
             $orderedItems = $this->orderByItems($data);
 
@@ -113,9 +115,9 @@ class BiodataMahasiswaFeederTable extends Component
 
     public function updatedSelectAll($value)
     {
-        // if (!session()->has('tokenPddikti')) {
-        //     return back();
-        // }
+        if ($this->searchItems() === false) {
+            return back();
+        }
 
         if ($this->search && $this->sortField !== 'id_mahasiswa') {
             $response = getDataWithAct('GetBiodataMahasiswa', null, $this->filter)['data'];
@@ -125,15 +127,15 @@ class BiodataMahasiswaFeederTable extends Component
 
         if ($value) {
             $this->selected = collect($response)->pluck('id_mahasiswa')->toArray();
-        } else {
-            $this->selected = [];
         }
     }
 
     public function deleteData()
     {
+        $this->updatedSelectAll($this->selectAll);
         $id_mahasiswa = $this->selected;
 
+        // dd($id_mahasiswa);
         if (!$id_mahasiswa) {
             return back()->with('deleteMessageWarning', 'Pilih data yang ingin di hapus');
         }
@@ -146,6 +148,10 @@ class BiodataMahasiswaFeederTable extends Component
 
             // dd($response['error_code']);
             if ($response['error_code'] !== 0) {
+                Log::error("DeleteBiodataMahasiswa", [
+                    'user' => auth()->user(),
+                    'response' => $response
+                ]);
                 return back()->with('deleteMessageError', 'Gagal : ' . $response['error_desc']);
             }
 
@@ -153,6 +159,6 @@ class BiodataMahasiswaFeederTable extends Component
 
         }
 
-        return redirect(route('dashboard.biodata-mahasiswa'))->with('messageSuccess', 'Delete Data Berhasil');
+        return redirect(route('dashboard.biodata-mahasiswa'))->with('message', 'Delete Data Berhasil');
     }
 }
