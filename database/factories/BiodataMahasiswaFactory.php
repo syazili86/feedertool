@@ -17,7 +17,10 @@ class BiodataMahasiswaFactory extends Factory
     public function definition()
     {
         return [
+            "id_mahasiswa" => $this->faker->uuid(),
             "nama_mahasiswa" => $this->faker->name(),
+            "nim" => $this->faker->bothify('18#########'),
+            "idnumber" => $this->faker->randomNumber(7, false),
             "jenis_kelamin" => $this->faker->randomElement(['L', 'P']),
             "tempat_lahir" => $this->faker->city(),
             "tanggal_lahir" => $this->faker->date(),

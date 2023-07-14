@@ -19,7 +19,7 @@ return new class extends Migration
             $table->uuid("id_mahasiswa")->unique();
             $table->string('nim'); // untuk menampung nim dari data yang diimport
             $table->integer('idnumber'); // untuk menampung primary key dari data yang diimport
-            $table->integer('id_neofeeder'); // untuk menampung primary key feeder biodata mahasiswa
+            $table->string('id_neofeeder')->nullable(); // untuk menampung primary key feeder biodata mahasiswa
             $table->string("nama_mahasiswa", 100);
             $table->char("jenis_kelamin", 1);
             $table->string("tempat_lahir", 32);

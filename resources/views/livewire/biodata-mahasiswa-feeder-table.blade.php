@@ -1,19 +1,18 @@
 <div>
 
-    <div id="modalDelete" class="hidden fixed z-10 inset-0 overflow-y-auto">
+    {{-- modal delete --}}
+    {{-- <div id="modalDelete" class="hidden fixed z-10 inset-0 overflow-y-auto">
         <div class="flex items-center justify-center min-h-screen px-4 py-10 text-center">
             <div class="fixed inset-0 bg-black opacity-75"></div>
             <div
                 class="bg-white py-3 rounded-lg overflow-hidden shadow-xl transform w-1/3 transition-all sm:max-w-lg sm:w-full">
                 <div class="p-5">
-                    {{-- <h4 class="text-4xl font-semibold text-red-600 mb-5">Konfirmasi Hapus</h4> --}}
                     <p class=" text-red-500 mb-2">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="bg-gray-200 mx-auto rounded-full p-2 w-20 h-20">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                         </svg>
-
                     </p>
                     <p class="text-lg text-black">Apakah Anda yakin !!!</p>
                     <span>ingin menghapus data yang sudah pilih ?</span>
@@ -34,7 +33,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     @if (session()->has('deleteMessageWarning'))
         <div class="border text-yellow-700 p-4 border-yellow-300 bg-yellow-200 mx-1 mb-3 rounded">
@@ -104,7 +103,9 @@
                 </svg>
             </div>
         </div>
-        <div class="relative mx-1">
+
+        {{-- btn delete --}}
+        {{-- <div class="relative mx-1">
             <button onclick="modalFn('modalDelete')"
                 class="block w-full px-4 py-3 pr-8 leading-tight text-white
             bg-red-500 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-red-600
@@ -119,7 +120,7 @@
                 </svg>
 
             </div>
-        </div>
+        </div> --}}
     </div>
 
     @if ($users)
@@ -129,8 +130,9 @@
                 <table class="w-full mb-6 text-xs table-auto">
                     <thead>
                         <tr class="bg-gray-200">
-                            <th class="px-4 py-2"><input wire:model="selectAll" class="cursor-pointer" type="checkbox">
-                            </th>
+                            {{-- <th class="px-4 py-2">
+                                <input wire:model="selectAll" class="cursor-pointer" type="checkbox">
+                            </th> --}}
                             <th class="px-4 py-2">Name</th>
                             <th class="px-4 py-2">Jenis Kelamin</th>
                             <th class="px-4 py-2">Tanggal Lahir</th>
@@ -148,10 +150,10 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr wire:loading.remove>
-                                <td class="px-4 py-2 text-center border-b">
+                                {{-- <td class="px-4 py-2 text-center border-b">
                                     <input wire:model="selected" class="cursor-pointer"
                                         value="{{ $user['id_mahasiswa'] }}" type="checkbox">
-                                </td>
+                                </td> --}}
                                 <td class="px-4 py-2 border-b">{{ $user['nama_mahasiswa'] }}</td>
                                 <td class="px-4 py-2 border-b">{{ $user['jenis_kelamin'] }}</td>
                                 <td class="px-4 py-2 border-b">{{ $user['tanggal_lahir'] }}</td>

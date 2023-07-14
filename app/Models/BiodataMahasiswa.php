@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class BiodataMahasiswa extends Model
 {
     use HasFactory;
-    use HasUuids;
 
     protected $guarded = ['id'];
 
