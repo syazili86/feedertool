@@ -44,7 +44,7 @@ class BiodataMahasiswaFactory extends Factory
             "nomor_kps" => $this->faker->bothify('#############'),
             "nik_ayah" => $this->faker->bothify('16##############'),
             "nama_ayah" => $this->faker->name(),
-            "tanggal_lahir" => $this->faker->date(),
+            "tanggal_lahir_ayah" => $this->faker->date(),
             "id_pendidikan_ayah" => 6,
             "id_pekerjaan_ayah" => 5,
             "id_penghasilan_ayah" => 14,

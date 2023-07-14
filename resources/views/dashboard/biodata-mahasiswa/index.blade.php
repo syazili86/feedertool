@@ -120,8 +120,9 @@
     @if (session()->has('data') && session('data') !== false)
         <div id="data-fails" class="grid gap-6 mt-6 xl:grid-cols-1">
             <div class="card">
-                <div class="card-body relative" onclick="modalFn('data-fails')">
-                    <div class="absolute right-0 top-0 cursor-pointer rounded-full -mr-2 -mt-2 ">
+                <div class="card-body relative">
+                    <div class="absolute right-0 top-0 cursor-pointer rounded-full -mr-2 -mt-2 "
+                        onclick="modalFn('data-fails')">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="bg-white p-1 border mx-auto rounded-full w-8 h-8 hover:bg-red-100">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />

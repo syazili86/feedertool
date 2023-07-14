@@ -18,7 +18,6 @@ class BiodataMahasiswa extends Model
     {
         return empty($search) ? static::query()
             : static::where('id_mahasiswa', 'like', '%' . $search . '%')
-            ->orWhere('nama_mahasiswa', 'like', '%' . $search . '%')
-            ->orWhere('tempat_lahir', 'like', '%' . $search . '%');
+            ->orWhere('nama_mahasiswa', 'like', '%' . $search . '%');
     }
 }

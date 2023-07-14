@@ -43,7 +43,7 @@ class BiodataMahasiswaFeederTable extends Component
         }
 
         return view('livewire.biodata-mahasiswa-feeder-table', [
-            'users' => $items,
+            'biodataMahasiswa' => $items,
             'searchBy' => $this->sortField,
             'selected' => $this->selected
         ]);

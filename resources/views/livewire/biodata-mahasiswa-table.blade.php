@@ -6,7 +6,6 @@
             <div
                 class="bg-white py-3 rounded-lg overflow-hidden shadow-xl transform w-1/3 transition-all sm:max-w-lg sm:w-full">
                 <div class="p-5">
-                    {{-- <h4 class="text-4xl font-semibold text-green-600 mb-5">Konfirmasi Hapus</h4> --}}
                     <p class=" text-green-500 w-20 h-20 mx-auto bg-gray-300 rounded-full mb-2">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="mx-auto w-20 h-20">
@@ -55,15 +54,12 @@
         <input wire:model.debounce.300ms="search" type="text"
             class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"placeholder="Search ...">
     </div>
-    <div class="ml-1">
-        Filter
-    </div>
     <div class="flex w-full pb-10">
         <div class="relative mx-1">
             <select wire:model="sortField"
                 class="block w-full px-4 py-3 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
                 id="grid-state">
-                <option value="id_mahasiswa">ID</option>
+                <option value="id">ID</option>
                 <option value="nama_mahasiswa">Name</option>
                 <option value="jenis_kelamin">Jenis Kelamin</option>
                 <option value="tempat_lahir">Tempat Lahir</option>
@@ -119,8 +115,8 @@
             </div>
         </div>
     </div>
-    @if ($users)
-        @if ($users->isNotEmpty())
+    @if ($biodataMahasiswa)
+        @if ($biodataMahasiswa->isNotEmpty())
             <div class="overflow-x-auto">
 
                 <table class="w-full mb-6 text-xs table-auto">
@@ -131,49 +127,75 @@
                             <th class="px-4 py-2">Status Sync</th>
                             <th class="px-4 py-2">Name</th>
                             <th class="px-4 py-2">Jenis Kelamin</th>
-                            <th class="px-4 py-2">Tanggal Lahir</th>
                             <th class="px-4 py-2">Tempat Lahir</th>
-                            <th class="px-4 py-2">Agama</th>
+                            <th class="px-4 py-2">Tanggal Lahir</th>
                             <th class="px-4 py-2">NIK</th>
                             <th class="px-4 py-2">NISN</th>
+                            <th class="px-4 py-2">NPWP</th>
+                            <th class="px-4 py-2">Kewarganegaraan</th>
                             <th class="px-4 py-2">Jalan</th>
+                            <th class="px-4 py-2">Dusun</th>
+                            <th class="px-4 py-2">rt</th>
+                            <th class="px-4 py-2">rw</th>
                             <th class="px-4 py-2">Kelurahan</th>
+                            <th class="px-4 py-2">Kode Pos</th>
+                            <th class="px-4 py-2">Telepon</th>
+                            <th class="px-4 py-2">Handphone</th>
+                            <th class="px-4 py-2">Email</th>
+                            <th class="px-4 py-2">Penerima KPS</th>
+                            <th class="px-4 py-2">Nomor KPS</th>
+                            <th class="px-4 py-2">NIK Ayah</th>
                             <th class="px-4 py-2">Nama Ayah</th>
+                            <th class="px-4 py-2">NIK Ibu</th>
                             <th class="px-4 py-2">Nama Ibu</th>
+                            <th class="px-4 py-2">Nama Wali</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        @foreach ($users as $user)
-                            <tr wire:loading.remove class="{{ $user->sudah_sync ? 'bg-green-100' : '' }}">
+                        @foreach ($biodataMahasiswa as $item)
+                            <tr wire:loading.remove class="{{ $item->sudah_sync ? 'bg-green-100' : '' }}">
                                 <td class="px-4 py-2 text-center border-b">
-                                    <input wire:model="selected" class="cursor-pointer"
-                                        value="{{ $user->id_mahasiswa }}" type="checkbox">
+                                    <input wire:model="selected" class="cursor-pointer" value="{{ $item->id }}"
+                                        type="checkbox">
                                 </td>
                                 <td class="px-4 py-2 border-b">
-                                    @if ($user->sudah_sync)
+                                    @if ($item->sudah_sync)
                                         <p class="text-xs font-bold text-green-500">Sudah Sync</p>
                                     @else
                                         <p class="text-xs font-bold text-red-500">Belum Sync</p>
                                     @endif
                                 </td>
-                                <td class="px-4 py-2 border-b">{{ $user->nama_mahasiswa }}</td>
-                                <td class="px-4 py-2 border-b">{{ $user->jenis_kelamin }}</td>
-                                <td class="px-4 py-2 border-b">{{ $user->tanggal_lahir }}</td>
-                                <td class="px-4 py-2 border-b">{{ $user->tempat_lahir }}</td>
-                                <td class="px-4 py-2 border-b">{{ $user->nama_agama }}</td>
-                                <td class="px-4 py-2 border-b">{{ $user->nik }}</td>
-                                <td class="px-4 py-2 border-b">{{ $user->nisn }}</td>
-                                <td class="px-4 py-2 border-b">{{ $user->jalan }}</td>
-                                <td class="px-4 py-2 border-b">{{ $user->kelurahan }}</td>
-                                <td class="px-4 py-2 border-b">{{ $user->nama_ayah }}</td>
-                                <td class="px-4 py-2 border-b">{{ $user->nama_ibu_kandung }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->nama_mahasiswa }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->jenis_kelamin }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->tempat_lahir }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->tanggal_lahir }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->nik }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->nisn }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->npwp }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->kewarganegaraan }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->jalan }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->dusun }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->rt }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->rw }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->kelurahan }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->kode_pos }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->telepon }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->handphone }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->email }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->penerima_kps ? 'Ya' : 'Tidak' }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->nomor_kps }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->nik_ayah }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->nama_ayah }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->nik_ibu }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->nama_ibu_kandung }}</td>
+                                <td class="px-4 py-2 border-b">{{ $item->nama_wali }}</td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-            {!! $users->links() !!}
+            {!! $biodataMahasiswa->links() !!}
         @else
             <p class="text-center">Whoops! Data Tidak Ditemukan 🙁</p>
         @endif
