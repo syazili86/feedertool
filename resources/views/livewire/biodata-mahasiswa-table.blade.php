@@ -54,16 +54,17 @@
         <input wire:model.debounce.300ms="search" type="text"
             class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"placeholder="Search ...">
     </div>
+    <div class="ml-1">
+        Filter
+    </div>
     <div class="flex w-full pb-10">
         <div class="relative mx-1">
-            <select wire:model="sortField"
+            <select wire:model="filterField"
                 class="block w-full px-4 py-3 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
                 id="grid-state">
-                <option value="id">ID</option>
-                <option value="nama_mahasiswa">Name</option>
-                <option value="jenis_kelamin">Jenis Kelamin</option>
-                <option value="tempat_lahir">Tempat Lahir</option>
+                <option>Pilih Field</option>
                 <option value="sudah_sync">Status Sync</option>
+                <option value="penerima_kps">Penerima KPS</option>
             </select>
             <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 pointer-events-none">
                 <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -72,26 +73,16 @@
             </div>
         </div>
         <div class="relative mx-1">
-            <select wire:model="sortAsc"
+            <select wire:model="filterValue"
                 class="block w-full px-4 py-3 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
                 id="grid-state">
-                <option value="0">Desc</option>
-                <option value="1">Asc</option>
-            </select>
-            <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 pointer-events-none">
-                <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-            </div>
-        </div>
-        <div class="relative w-1/6 mx-1">
-            <select wire:model="perPage"
-                class="block w-full px-4 py-3 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-state">
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
+                <option>Pilih By</option>
+                @if ($filterField)
+                    <option value="yes" wire:click='updatedFilter'>
+                        {{ $filterField === 'sudah_sync' ? 'Sudah Sync' : 'Ya' }}</option>
+                    <option value="no" wire:click='updatedFilter'>
+                        {{ $filterField === 'sudah_sync' ? 'Belum Sync' : 'Tidak' }}</option>
+                @endif
             </select>
             <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 pointer-events-none">
                 <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -124,8 +115,34 @@
                         <tr class="bg-gray-200">
                             <th class="px-4 py-2"><input wire:model="selectAll" class="cursor-pointer" type="checkbox">
                             </th>
-                            <th class="px-4 py-2">Status Sync</th>
-                            <th class="px-4 py-2">Name</th>
+                            <th class="px-4 py-2 cursor-pointer" wire:click="sortBy('sudah_sync')">
+                                <div class="flex items-center gap-2">
+                                    @if ($sortField === 'sudah_sync' or $sortField === 'id_mahasiswa')
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="{{ $sortAsc ? 'M19.5 8.25l-7.5 7.5-7.5-7.5' : 'M4.5 15.75l7.5-7.5 7.5 7.5' }}" />
+                                        </svg>
+                                    @endif
+                                    <span>
+                                        Status Sync
+                                    </span>
+                                </div>
+                            </th>
+                            <th class="px-4 py-2 cursor-pointer" wire:click="sortBy('nama_mahasiswa')">
+                                <div class="flex items-center gap-2">
+                                    @if ($sortField === 'nama_mahasiswa')
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="{{ $sortAsc ? 'M19.5 8.25l-7.5 7.5-7.5-7.5' : 'M4.5 15.75l7.5-7.5 7.5 7.5' }}" />
+                                        </svg>
+                                    @endif
+                                    <span>
+                                        Nama
+                                    </span>
+                                </div>
+                            </th>
                             <th class="px-4 py-2">Jenis Kelamin</th>
                             <th class="px-4 py-2">Tempat Lahir</th>
                             <th class="px-4 py-2">Tanggal Lahir</th>

@@ -19,29 +19,53 @@ class BiodataMahasiswaTable extends Component
     public $sortAsc = false;
     public $selectAll = false;
     public $selected = [];
+    public $filterField = '';
+    public $filterValue = '';
     public $loading = false;
 
 
     public function render()
     {
-        // dd($this->search ? true : false);
+
+        if ($this->filterField and $this->filterValue) {
+            $data = BiodataMahasiswa::where($this->filterField, $this->filterValue === 'yes' ? 1 : 0)
+                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                ->simplePaginate($this->perPage);
+        } else {
+            $data = BiodataMahasiswa::search($this->search)
+                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                ->simplePaginate($this->perPage);
+        }
 
         if ($this->selectAll) {
             $this->updatedSelectAll($this->selectAll);
         }
+
         // dd(session()->get('tokenPddikti'));
         return view('livewire.biodata-mahasiswa-table', [
-            'biodataMahasiswa' => BiodataMahasiswa::search($this->search)
-                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-                ->simplePaginate($this->perPage),
-            'searchBy' => $this->sortField
+            'biodataMahasiswa' => $data,
+            'sortField' => $this->sortField,
+            'sortAsc' => $this->sortAsc,
+            'filterField' => $this->filterField
         ]);
+    }
+
+    public function sortBy($field)
+    {
+        $this->sortField = $field;
+
+        $this->sortAsc = $this->sortAsc ? false : true;
     }
 
     public function updatedSelectAll($value)
     {
         if ($value) {
-            $data = BiodataMahasiswa::search($this->search)->pluck('id');
+            if ($this->filterField and $this->filterValue) {
+                $data = BiodataMahasiswa::where($this->filterField, $this->filterValue === 'yes' ? 1 : 0)->pluck('id');
+            } else {
+                $data = BiodataMahasiswa::search($this->search)->pluck('id');
+            }
+
             if ($data) {
                 $this->selected = $data;
             } else {
